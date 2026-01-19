@@ -2,10 +2,15 @@ import streamlit as st
 import pickle
 import string
 import nltk
-import nltk
-nltk.download('punkt')
-nltk.download('stopwords')
 
+# ✅ REQUIRED FOR STREAMLIT CLOUD (Python 3.13)
+@st.cache_resource
+def load_nltk():
+    nltk.download('punkt')
+    nltk.download('punkt_tab')
+    nltk.download('stopwords')
+
+load_nltk()
 
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
@@ -60,3 +65,4 @@ if st.button("Predict"):
         st.header("✅ Not Spam")
 
     st.write(f"**Confidence:** {confidence:.2f}")
+
